@@ -3,6 +3,7 @@ import CustomModal from "../../components/customModal/CustomModal";
 import { Paths } from "../../routes/path";
 import {
   ButtonWrapper,
+  ErrorMessageText,
   IconWrapper,
   InputField,
   InputFieldContainer,
@@ -13,7 +14,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Button from "../../components/button/Button";
-import { Form, Formik } from "formik";
+import { Form, Formik, ErrorMessage } from "formik";
 import { useSignUpFormMutation } from "../../logic/reactQuery/mutation/useMutationSignUp";
 import ErrorModal from "../../components/errorModal/ErrorModal";
 import SuccessModal from "../../components/successModal/SuccessModal";
@@ -28,7 +29,7 @@ interface I_RegisterProps {
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().trim().required("Name is required"),
-  username: Yup.string().trim().required("Name is required"),
+  username: Yup.string().trim().required("User Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .trim()
@@ -108,6 +109,9 @@ const RegisterSection = () => {
                     autocomplete="off"
                   />
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="name" />
+                </ErrorMessageText>
               </InputMainContainer>
               <InputMainContainer>
                 <InputLabel>Username</InputLabel>
@@ -119,12 +123,18 @@ const RegisterSection = () => {
                     autocomplete="off"
                   />
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="username" />
+                </ErrorMessageText>
               </InputMainContainer>
               <InputMainContainer>
                 <InputLabel>Email</InputLabel>
                 <InputFieldContainer>
                   <InputField type="text" placeholder="Email" name="email" />
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="email" />
+                </ErrorMessageText>
               </InputMainContainer>
               <InputMainContainer>
                 <InputLabel>Password</InputLabel>
@@ -143,6 +153,9 @@ const RegisterSection = () => {
                     )}
                   </IconWrapper>
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="password" />
+                </ErrorMessageText>
               </InputMainContainer>
               <InputMainContainer>
                 <InputLabel>Confirm Password</InputLabel>
@@ -162,6 +175,9 @@ const RegisterSection = () => {
                     )}
                   </IconWrapper>
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="confirmPassword" />
+                </ErrorMessageText>
               </InputMainContainer>
               <ButtonWrapper>
                 <Button type="submit" isLoading={isLoading} text="REGISTER" />

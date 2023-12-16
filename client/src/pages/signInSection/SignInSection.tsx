@@ -4,6 +4,7 @@ import CustomModal from "../../components/customModal/CustomModal";
 import { Paths } from "../../routes/path";
 import {
   ButtonWrapper,
+  ErrorMessageText,
   IconWrapper,
   InputField,
   InputFieldContainer,
@@ -13,7 +14,7 @@ import {
 import * as Yup from "yup";
 import Button from "../../components/button/Button";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { useSignInFormMutation } from "../../logic/reactQuery/mutation/useMutationSignIn";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../logic/redux/action/action";
@@ -94,6 +95,9 @@ const SignInSection = () => {
                     autocomplete="off"
                   />
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="email" />
+                </ErrorMessageText>
               </InputMainContainer>
               <InputMainContainer>
                 <InputLabel>Password</InputLabel>
@@ -112,6 +116,9 @@ const SignInSection = () => {
                     )}
                   </IconWrapper>
                 </InputFieldContainer>
+                <ErrorMessageText>
+                  <ErrorMessage name="password" />
+                </ErrorMessageText>
               </InputMainContainer>
               <ButtonWrapper>
                 <Button type="submit" isLoading={isLoading} text="SIGN IN" />
